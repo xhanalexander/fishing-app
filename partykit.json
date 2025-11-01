@@ -1,0 +1,6 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "fish-party",
+  "main": "partykit/index.js",
+  "compatibilityDate": "2025-11-01"
+}

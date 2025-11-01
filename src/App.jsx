@@ -1,0 +1,37 @@
+import { Canvas } from "@react-three/fiber";
+import { MobileData } from "./Ui/MobileData";
+import { MobileController } from "./Ui/mobile/MobileController";
+import { Experience } from "./Experience";
+import { usePartyKitConnection } from "./hooks";
+
+function App() {
+console.log(`%c
+     |\\    o
+    |  \\    o
+|\\ /    .\\ o
+| |       (
+|/ \\     /
+    |  /
+     |/
+
+     Fishing game v0.0.1 🐟🐟
+`, 'color: #4A90E2; font-family: monospace;');
+  const deviceType = new URLSearchParams(window.location.search).get("room")
+    ? "mobile"
+    : "desktop";
+
+  usePartyKitConnection(deviceType);
+  if (deviceType === "mobile") {
+    return <MobileController />;
+  }
+  return (
+    <div className="canvas-container">
+      <MobileData />
+      <Canvas>
+        <Experience />
+      </Canvas>
+    </div>
+  );
+}
+
+export default App;
