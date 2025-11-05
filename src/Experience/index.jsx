@@ -1,25 +1,29 @@
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
-import { Particles } from "./Particles/Particles";
 import { Camera } from "./Camera";
-import { FishingPool } from "./models/FishingPool";
-import { Fishes } from "./entities/Fishes";
-import { PlayerController } from "./PlayerController";
+import { Track } from "./Track";
+import { OrbitControls } from "@react-three/drei";
+import { Pin } from "./Pin";
+
 
 export const Experience = () => {
   return (
     <>
       <color attach="background" args={[0xffffff]} />
       <Suspense fallback={null}>
-        <Physics gravity={[0, -40, 0]} timeStep={"vary"}>
-          <FishingPool />
+        <Physics debug gravity={[0, -40, 0]} timeStep={"vary"}>
+          {/* <FishingPool />
           <PlayerController />
-          <Fishes />
+          <Fishes /> */}
+          <Pin/>
+          <Track/>
         </Physics>
       </Suspense>
-      <Particles />
-      <Camera/>
+      {/* <Particles /> */}
+      {/* <Camera/> */}
+      <OrbitControls />
       <ambientLight intensity={4} />
+      <directionalLight position={[0, 0, 10]} intensity={10} />
       {/* <RenderTargetExample /> */}
     </>
   )

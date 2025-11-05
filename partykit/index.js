@@ -23,17 +23,22 @@ class PartyServer {
    * @param {ConnectionContext} ctx
    */
   onConnect(conn, ctx) {
-    const origin = ctx.request.headers.get("origin");
+  const origin = ctx.request.headers.get("origin");
+  const userAgent = ctx.request.headers.get("user-agent");
+  const acceptLanguage = ctx.request.headers.get("accept-language");
+  const hour = new Date().getHours();
+  const minutes = new Date().getMinutes();
 
+  console.log(`Connected:
+    id: ${conn.id}
+    room: ${this.room.id}
+    url: ${new URL(ctx.request.url).pathname}
+    origin: ${origin}
+    user-agent: ${userAgent}
+    language: ${acceptLanguage}
+    hour: ${hour}:${minutes}
+  `);
 
-    console.log(
-      `Connected:
-  id: ${conn.id}
-  room: ${this.room.id}
-  url: ${new URL(ctx.request.url).pathname}`
-    );
-
-    // Send current room state to new connection
     conn.send(
       JSON.stringify({
         type: "connected",
